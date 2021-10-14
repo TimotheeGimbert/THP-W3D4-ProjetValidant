@@ -12,7 +12,7 @@ def get_city_name(city_url) # returns a name as a string
   page = Nokogiri::HTML(URI.open(city_url))
   city_name = page.xpath('/html/body/div/main/section[1]/div/div/div/h1').text
   city_name = city_name[0..-9]
-  puts city_name
+  print city_name + " => "
   return city_name
 end
 
@@ -23,20 +23,21 @@ def get_dpt_urls(dpt_url) # returns an array of urls as strings
   return dpt_urlS
 end
 
-
-
-
-
-
-def perform
+def scrap_dpt_emails(urls_array)
   data_array = Array.new
-  url_95 = 'https://www.annuaire-des-mairies.com/val-d-oise.html'
-  urlS = get_dpt_urls(url_95)
-  urlS.each {|url| 
+  urls_array.each {|url| 
     city_name = get_city_name(url)
     city_email = get_city_email(url)
     data_array.push( { city_name => city_email } )
   }
+  return data_array
+end
+
+
+def perform
+  url_95 = 'https://www.annuaire-des-mairies.com/val-d-oise.html'
+  urls_array = get_dpt_urls(url_95)
+  #puts scrap_dpt_emails(urls_array)
 end
 
 perform
