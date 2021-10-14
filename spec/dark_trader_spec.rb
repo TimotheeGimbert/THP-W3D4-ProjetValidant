@@ -23,5 +23,3 @@ describe "crypto_scraper method" do
     expect(crypto_scraper(page)[0]).to be_a(Hash)
   end
 end
-
-
