@@ -35,6 +35,7 @@ end
 
 
 def perform
+  system('clear')
   url_95 = 'https://www.annuaire-des-mairies.com/val-d-oise.html'
   urls_array = get_dpt_urls(url_95)
   scrap_dpt_emails(urls_array)

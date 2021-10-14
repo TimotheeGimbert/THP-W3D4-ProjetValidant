@@ -29,6 +29,7 @@ def crypto_scraper(page) # returns an ARRAY of coins data as HASHES
 end
 
 def perform
+  system('clear')
   page = Nokogiri::HTML(URI.open('https://coinmarketcap.com/all/views/all/'))
   puts crypto_scraper(page)
 end
