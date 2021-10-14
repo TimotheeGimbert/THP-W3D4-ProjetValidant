@@ -15,7 +15,7 @@ def crypto_scrapper(page)
   
   tokens = Array.new # array that will hold final data
   coinS.length.times do |i|
-    coin_hash = { coinS[i] => priceS[i]}
+    coin_hash = { coinS[i] => priceS[i] }
     tokens.push(coin_hash)
   end
   puts tokens
