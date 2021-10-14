@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 
+
 def crypto_scrapper(page)
   
   coins_nodeset = page.xpath('//tbody//tr/td[3]/div') # get the coins's names nodeset 
@@ -17,8 +18,8 @@ def crypto_scrapper(page)
     coin_hash = { coinS[i] => priceS[i]}
     tokens.push(coin_hash)
   end
-  
   puts tokens
+  return tokens
 end
 
 def perform
