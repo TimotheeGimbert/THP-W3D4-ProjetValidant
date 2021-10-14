@@ -3,7 +3,6 @@ GEM
   specs:
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
-    poke-api-v2 (0.1.1)
     racc (1.5.2)
 
 PLATFORMS
@@ -11,7 +10,6 @@ PLATFORMS
 
 DEPENDENCIES
   nokogiri
-  poke-api-v2
 
 RUBY VERSION
    ruby 2.7.4p191
