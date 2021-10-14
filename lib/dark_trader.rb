@@ -1,30 +1,36 @@
 require 'open-uri'
 require 'nokogiri'
 
+def get_coins_names(page) # returns an ARRAY of names as STRINGS
+  names = page.xpath('//tbody//tr/td[3]/div').to_a
+  names.map! {|node| node.text}
+  return names
+end
 
-def crypto_scrapper(page)
-  
-  coins_nodeset = page.xpath('//tbody//tr/td[3]/div') # get the coins's names nodeset 
-  prices_nodeset = page.xpath('//tbody//tr/td[5]/div/a') # get the coins's prices nodeset
+def get_coins_prices(page) # returns an ARRAY of prices as STRINGS
+  prices_array = page.xpath('//tbody//tr/td[5]/div/a').to_a
+  prices_array.map! {|node| node = node.text[1..-1]} # makes nodes as astring and remove $ sign
+  return prices_array
+end
 
-  coinS = Array.new # array that will hold coins's names
-  coins_nodeset.each {|div| coinS.push(div.text)}
 
-  priceS = Array.new # array that will hold coins'prices
-  prices_nodeset.each {|a| priceS.push(a.text[1..-1])} # removes the $ sign by selecting char 1..-1
-  
+def crypto_scrapper(page) # returns an ARRAY of coins data as HASHES
   tokens = Array.new # array that will hold final data
-  coinS.length.times do |i|
-    coin_hash = { coinS[i] => priceS[i] }
+
+  names_array = get_coins_names(page)
+  prices_array = get_coins_prices(page)
+  
+  names_array.length.times do |i|
+    coin_hash = { names_array[i] => prices_array[i] }
     tokens.push(coin_hash)
   end
-  puts tokens
+
   return tokens
 end
 
 def perform
   page = Nokogiri::HTML(URI.open('https://coinmarketcap.com/all/views/all/'))
-  crypto_scrapper(page)
+  puts crypto_scrapper(page)
 end
 
 perform
